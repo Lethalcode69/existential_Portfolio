@@ -1,0 +1,13 @@
+/* 404 page */
+:root{--teal:#2DE6D2;--violet:#8B5CF6;--tx:#eef1f6}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;background:#040509;color:var(--tx)}
+body{display:grid;place-items:center;padding:6vh 6vw;font-family:"Helvetica Neue",Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;text-align:center;
+  background:radial-gradient(60% 50% at 50% 38%,rgba(45,230,210,.10),transparent 70%),#040509}
+main{max-width:34rem}
+img{display:block;width:clamp(96px,22vw,150px);height:auto;margin:0 auto 1.6rem;opacity:.95;-webkit-mask-image:radial-gradient(closest-side,#000 64%,transparent 100%);mask-image:radial-gradient(closest-side,#000 64%,transparent 100%)}
+.code{margin:0 0 .9rem;font-size:.7rem;letter-spacing:.28em;text-transform:uppercase;color:var(--teal)}
+h1{margin:0;font-weight:500;font-size:clamp(2rem,6vw,3.4rem);line-height:1.05;letter-spacing:-.05em}
+p.lede{margin:1.1rem auto 0;max-width:42ch;line-height:1.65;color:rgba(238,242,248,.78)}
+a.btn{display:inline-block;margin-top:2rem;padding:.9rem 1.4rem;border:1px solid rgba(201,206,214,.4);border-radius:999px;color:var(--tx);text-decoration:none;font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;transition:background .25s,color .25s,border-color .25s}
+a.btn:hover,a.btn:focus-visible{background:var(--teal);border-color:var(--teal);color:#031412;outline:none}

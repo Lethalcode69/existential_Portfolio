@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://existential.design/</loc>
+    <lastmod>2026-11-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <image:image><image:loc>https://existential.design/og-image.jpg</image:loc><image:caption>Aman Singh, Product Designer</image:caption></image:image>
+    <image:image><image:loc>https://existential.design/assets/img/kinetic-dashboard.webp</image:loc><image:caption>Kinetic WTW Compass dashboard with AI bulk upload result</image:caption></image:image>
+    <image:image><image:loc>https://existential.design/assets/img/kinetic-project-listing.webp</image:loc><image:caption>Kinetic project listing and AI-generated project records</image:caption></image:image>
+    <image:image><image:loc>https://existential.design/assets/img/lms-community-support.webp</image:loc><image:caption>Learning Management System community and support interface</image:caption></image:image>
+    <image:image><image:loc>https://existential.design/assets/img/lms-faculty-timetable.webp</image:loc><image:caption>Learning Management System faculty timetable and meeting management interface</image:caption></image:image>
+    <image:image><image:loc>https://existential.design/assets/img/ai-insurance-risk-advisor.webp</image:loc><image:caption>AI for Insurance personal risk advisor dashboard</image:caption></image:image>
+    <image:image><image:loc>https://existential.design/assets/img/ai-insurance-policy-comparison.webp</image:loc><image:caption>AI for Insurance policy versus policy comparison results</image:caption></image:image>
+    <image:image><image:loc>https://existential.design/assets/img/asuretify-homepage.webp</image:loc><image:caption>Asuretify homepage and product experience</image:caption></image:image>
+    <image:image><image:loc>https://existential.design/assets/img/asuretify-integrations.webp</image:loc><image:caption>Asuretify integrations, metrics, and trusted clients</image:caption></image:image>
+    <image:image><image:loc>https://existential.design/assets/img/kinetic-policy-detail.webp</image:loc><image:caption>Kinetic policy detail screen with coverage status, timeline, and documents</image:caption></image:image>
+  </url>
+</urlset>
