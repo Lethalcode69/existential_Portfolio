@@ -1,15 +1,19 @@
 {
-  "name": "Aman Singh \u2014 Product Designer",
-  "short_name": "Aman Singh",
-  "description": "Portfolio of Aman Singh, Product Designer for insurtech, B2B SaaS and AI products.",
   "id": "/",
+  "name": "existential.design",
+  "short_name": "existential",
+  "description": "One studio connecting brand, marketing, product design and technology. From first idea to what comes next. Start a conversation with existential.design.",
+  "lang": "en",
+  "dir": "ltr",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
-  "orientation": "any",
   "background_color": "#040509",
   "theme_color": "#040509",
-  "lang": "en",
+  "categories": [
+    "design",
+    "business"
+  ],
   "icons": [
     {
       "src": "/icon-192.png",
@@ -28,11 +32,6 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
-    },
-    {
-      "src": "/favicon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml"
     }
   ]
 }

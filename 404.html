@@ -2,23 +2,58 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Page not found | Aman Singh</title>
-<meta name="description" content="This page could not be found.">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Page not found — existential.design</title>
+<meta name="description" content="The page you’re looking for doesn’t exist or may have moved. Head back to existential.design.">
 <meta name="robots" content="noindex,follow">
 <meta name="theme-color" content="#040509">
+<meta name="color-scheme" content="dark">
 <link rel="icon" href="/favicon.ico" sizes="48x48">
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="icon" href="/favicon-16.png" type="image/png" sizes="16x16">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="stylesheet" href="/css/error.css?v=20261103">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="preload" as="image" href="/assets/img/mascot-404.webp?v=1fa398d9" type="image/webp" fetchpriority="high">
+<style>
+:root{--bg:#040509;--teal:#2DE6D2;--violet:#8B5CF6;--grey:#C9CED6;--tx:#eef1f6}
+*{box-sizing:border-box}
+html{background:var(--bg)}
+body{margin:0;min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2.6rem;
+  padding:max(28px,env(safe-area-inset-top)) 24px max(28px,env(safe-area-inset-bottom));overflow-x:hidden;position:relative;isolation:isolate;
+  background:var(--bg);color:var(--tx);font-family:"Helvetica Neue",Inter,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:radial-gradient(62vmax 40vmax at 50% 36%,rgba(45,230,210,.10),transparent 70%),
+             radial-gradient(52vmax 36vmax at 60% 46%,rgba(139,92,246,.09),transparent 70%)}
+main{display:flex;flex-direction:column;align-items:center;text-align:center;max-width:640px}
+.eyebrow{margin:0;font-size:.72rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--teal)}
+.code{display:flex;align-items:center;justify-content:center;margin:.4rem 0 .2rem;font-size:clamp(6.5rem,25vw,14rem);font-weight:500;line-height:1;letter-spacing:-.06em;user-select:none}
+.code span{background:linear-gradient(180deg,#ffffff 10%,#8b8d98 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.code img{display:block;width:1.55em;height:1.55em;margin:0 -.34em;object-fit:contain;animation:float 7s ease-in-out infinite;
+  filter:drop-shadow(0 0 22px rgba(45,230,210,.28)) drop-shadow(0 0 40px rgba(139,92,246,.24))}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-.06em)}}
+h1{margin:0;font-weight:500;font-size:clamp(2rem,4.6vw,3.2rem);line-height:1.08;letter-spacing:-.03em}
+h1 em{font-style:normal;color:var(--teal)}
+.sub{margin:1.1rem 0 0;max-width:36ch;font-size:clamp(.95rem,1.2vw,1.08rem);line-height:1.6;color:var(--grey)}
+.pill{display:inline-flex;align-items:center;gap:.7rem;margin-top:2rem;padding:.95rem 1.5rem;font:600 .72rem/1 inherit;font-family:inherit;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--tx);text-decoration:none;background:rgba(6,8,14,.35);border:1px solid rgba(201,206,214,.4);border-radius:999px;
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);transition:border-color .25s,background .25s}
+.pill:hover,.pill:focus-visible{border-color:var(--teal);background:rgba(45,230,210,.12);outline:none}
+.pill:focus-visible{outline:2px solid var(--teal);outline-offset:3px}
+.brand{font-size:1.15rem;font-weight:500;letter-spacing:-.045em;color:var(--tx);text-decoration:none}
+.brand .dot{color:var(--teal)}.brand .design{color:#8b8d98;font-weight:400}
+@media(max-width:760px){body{gap:2rem}.pill{margin-top:1.6rem}}
+@media(prefers-reduced-motion:reduce){.code img{animation:none}.pill{transition:none}}
+</style>
 </head>
 <body>
 <main>
-  <img src="/assets/img/orbital-mascot.webp" width="380" height="480" alt="">
-  <p class="code">Error 404</p>
-  <h1>This page hasn’t formed yet.</h1>
-  <p class="lede">The link may be old, or the address may have a typo. The portfolio is one page, and everything lives on it.</p>
-  <a class="btn" href="/">Back to the portfolio</a>
+  <p class="eyebrow">Error 404</p>
+  <div class="code" aria-hidden="true"><span>4</span><img src="/assets/img/mascot-404.webp?v=1fa398d9" alt="" width="640" height="640" decoding="async" fetchpriority="high"><span>4</span></div>
+  <h1>Lost between <em>ideas.</em></h1>
+  <p class="sub">The page you’re looking for doesn’t exist or may have moved. Let’s take you back to where things are evolving.</p>
+  <a class="pill" href="/">Back to home <span aria-hidden="true">→</span></a>
 </main>
+<a class="brand" href="/" aria-label="existential.design home">existential<span class="dot">.</span><span class="design">design</span></a>
 </body>
 </html>

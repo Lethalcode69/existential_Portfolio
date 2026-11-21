@@ -1,69 +1,93 @@
-# existential.design: Aman Singh portfolio
+# existential.design — website
 
-A static, no-build site. Everything needed to deploy is in this folder.
+Static, build-free site: plain HTML, CSS and JavaScript. No framework, no bundler, no dependencies.
+Everything in this folder is the site. Upload it as-is.
 
 ## Structure
 
 ```
-/
-├── index.html              the whole portfolio (one page, semantic HTML + JSON-LD)
-├── 404.html                branded not-found page (noindex)
-├── css/
-│   ├── main.css            base, nav, hero, capabilities, selected work, case studies, footer
-│   ├── sections.css        hero stage, About (tabs), resume tab, process, FAQ (loads after main.css)
-│   └── error.css           404 page
-├── js/
-│   ├── hero-pointcloud.js  hero animation (loops continuously)
-│   ├── scene.js            loader, nav, menu, hero hand-off
-│   ├── about.js            About reveal + Experience / Education / Toolkit tabs
-│   ├── selected-work.js    horizontal project panels + case-study dialogs
-│   ├── process.js  faq.js  footer-logo.js  whatsapp.js  soundtrack.js
-├── assets/
-│   ├── img/                project mockups, portrait, brand mark (WebP)
-│   ├── audio/soundtrack.mp3
-│   └── docs/Aman_Kumar_Singh_Resume.pdf     <- the sticky "Resume" tab downloads this
-├── favicon.ico  favicon.svg  favicon-16.png  favicon-32.png
-├── apple-touch-icon.png  icon-192.png  icon-512.png  icon-maskable-512.png
-├── og-image.jpg            1200x630 social preview
-├── site.webmanifest  robots.txt  sitemap.xml
-├── vercel.json             Vercel headers, caching, www -> apex redirect
-├── _headers                same rules for Netlify / Cloudflare Pages
-├── .htaccess               same rules for Apache / cPanel / Hostinger
-└── .nojekyll               stops GitHub Pages from running Jekyll
+index.html              the landing page (title, meta, Open Graph and JSON-LD structured data live in <head>)
+404.html                branded "page not found" page (mascot, noindex)
+css/
+  main.css              base, hero, navigation, about, case studies, footer
+  sections.css          lifecycle, "How we work", FAQ (loaded after main.css, order matters)
+js/                     one file per feature, loaded with defer in the order listed in index.html
+  lifecycle.js          3D lifecycle simulation
+  main.js               hero → sections hand-off, menu, section tracking
+  about.js, about-geometry.js, about-scroll.js    About overlay
+  selected-work.js      horizontal project panels + case-study overlays
+  faq.js, process.js, logo-reveal.js
+  whatsapp.js           floating WhatsApp button (edit the number at the top of the file)
+  sound.js              optional ambient soundtrack (starts only after the visitor allows it)
+assets/
+  img/                  mascot, project screenshots, portrait (WebP)
+  audio/                ambient-soundtrack.mp3
+favicon.ico · favicon.svg · favicon-16.png · favicon-32.png · apple-touch-icon.png
+icon-192.png · icon-512.png · icon-maskable-512.png      PWA / home-screen icons
+og-image.jpg            1200×630 social share image
+site.webmanifest        web app manifest
+robots.txt · sitemap.xml
+.htaccess               Apache (cPanel / shared hosting)
+_headers                Netlify and Cloudflare Pages
+vercel.json             Vercel
+.nojekyll               GitHub Pages (stops Jekyll from touching the folders)
+```
+
+## Preview locally
+
+Serve the folder over HTTP. Opening `index.html` by double-click will not work correctly, because
+the 3D scene and the root-relative icon/manifest paths need a web server.
+
+```
+python3 -m http.server 8080      # then open http://localhost:8080
+# or
+npx serve .
 ```
 
 ## Deploy
 
-Pick one. All of them serve the folder as-is (no build command, output directory = the folder root).
+Upload the contents of this folder to the **root** of the domain.
 
-- **Vercel**: import the folder or repo, framework preset "Other". `vercel.json` is picked up automatically.
-- **Netlify**: drag the folder onto app.netlify.com/drop, or connect the repo. `_headers` is picked up automatically.
-- **Cloudflare Pages**: connect the repo, build command empty, output directory `/`. `_headers` is picked up automatically.
-- **GitHub Pages**: push to a repo and enable Pages. `.nojekyll` is already here. Custom headers are not supported there, so the CSP and caching rules will not apply.
-- **Apache / cPanel / Hostinger**: upload the folder contents to `public_html`. `.htaccess` handles HTTPS, www redirect, compression, caching and headers.
+| Host | How |
+| --- | --- |
+| **Vercel** | Import the repo or drag the folder in. `vercel.json` sets headers, caching and the www → apex redirect. No build command, output directory `.` |
+| **Netlify** | Drag the folder into Netlify Drop, or connect the repo. `_headers` is picked up automatically. No build command, publish directory `.` |
+| **Cloudflare Pages** | Connect the repo or upload. `_headers` is supported. No build command, output directory `/`. |
+| **GitHub Pages** | Push to a repo and enable Pages. `.nojekyll` is included. Pages cannot send custom headers, so put Cloudflare in front if you want the security headers. Set the custom domain in the repo settings. |
+| **Apache / cPanel** | Upload everything including the dotfiles (`.htaccess`, `.nojekyll`). `.htaccess` handles HTTPS, www → apex, MIME types, gzip, caching, security headers and the 404 page. Needs `mod_rewrite`, `mod_headers`, `mod_deflate`. |
 
-Then point the domain at the host and confirm it serves over HTTPS.
+`404.html` is served automatically for unknown URLs on all of the above.
 
-## Before you launch
+## After it is live
 
-1. **Domain.** Everything is set to `https://existential.design`. If the live domain differs, find and replace it in `index.html` (canonical, og:url, og:image, JSON-LD), `sitemap.xml`, `robots.txt`, `vercel.json` and `.htaccess`.
-2. **Search Console.** Add the property, submit `https://existential.design/sitemap.xml`, and request indexing for the home page.
-3. **Preview the share card.** Paste the URL into LinkedIn Post Inspector and the Facebook Sharing Debugger (re-scrape if you ever change `og-image.jpg`).
-4. **Check structured data** with Google's Rich Results Test and validator.schema.org.
-5. **Run PageSpeed Insights** on mobile and desktop for a baseline.
+1. Confirm the domain. Every absolute URL assumes **https://existential.design**. If the domain differs, find-and-replace it in
+   `index.html`, `404.html`, `robots.txt`, `sitemap.xml` and `vercel.json`.
+2. Submit `https://existential.design/sitemap.xml` in Google Search Console and Bing Webmaster Tools, then request indexing of the homepage.
+3. Test the structured data at <https://search.google.com/test/rich-results> and <https://validator.schema.org>.
+4. Check the share preview in the LinkedIn Post Inspector and the Facebook Sharing Debugger (they cache the first fetch).
+5. Run PageSpeed Insights on mobile and desktop.
+
+## SEO included
+
+- Title (≤ 60 characters) and meta description (≤ 160), canonical URL, hreflang, robots directives
+- Open Graph and Twitter card tags with a 1200×630 image and alt text
+- JSON-LD: WebSite, WebPage, ProfessionalService (with the four disciplines), Person, FAQPage
+- Crawlable FAQ text, `<noscript>` fallback content, `lang="en"`, descriptive image alt text
+- `robots.txt`, `sitemap.xml` (with image entries), favicon set, web manifest, theme colour
+- Performance: all media are real files (not inlined), explicit image width/height, hero image preloaded,
+  below-the-fold images lazy-loaded, scripts deferred, soundtrack downloaded only when played,
+  one-year immutable caching for versioned assets, compression on Apache
+- Security headers: CSP (scripts must be external files, no inline JS), HSTS, nosniff, frame-ancestors, referrer and permissions policies
 
 ## Editing
 
-- **Cache busting.** CSS and JS are cached for a year and referenced with `?v=20261103`. When you change any CSS or JS file, bump that number in `index.html` (find and replace) so visitors get the new file.
-- **Resume.** Replace `assets/docs/Aman_Kumar_Singh_Resume.pdf`, keeping the file name.
-- **Soundtrack.** Replace `assets/audio/soundtrack.mp3`.
-- **WhatsApp number / message.** Top of `js/whatsapp.js`.
-- **Icons.** `favicon*`, `icon-*`, `apple-touch-icon.png` and `og-image.jpg` were generated from the orbital brand mark. Drop in your own finals using the same file names.
-- **Content Security Policy.** It allows only files from the same origin. If you add analytics, web fonts or embeds, add their hosts to the policy in `vercel.json`, `_headers` and `.htaccess`.
+- **Versioned assets.** CSS, JS and image URLs in `index.html` end in `?v=…`. After you change a file, change its
+  `?v=` value (any new string) so visitors get the new version instead of a cached copy.
+- **FAQ.** The six questions appear twice: in the page markup and in the FAQPage JSON-LD in `<head>`. Keep them identical.
+- **Inline scripts.** The CSP blocks inline `<script>` blocks. Put new JavaScript in a file under `js/`.
+- **Sitemap.** Update `<lastmod>` in `sitemap.xml` when the page content changes.
+- **WhatsApp.** Number and pre-filled message are at the top of `js/whatsapp.js`.
 
-## SEO notes
+## Sizes
 
-- One `h1`, a single `main` landmark, descriptive alt text and explicit width/height on every image.
-- Title 60 characters, description 153 characters, canonical, hreflang, robots directives, Open Graph and Twitter cards.
-- JSON-LD: `WebSite`, `ProfilePage`, `Person`, `ImageObject` and `FAQPage` (generated from the visible FAQ text).
-- The four case studies open as in-page dialogs, so search engines see their text on the home page but cannot list each one as its own result. Giving each case study its own URL (`/work/kinetic`, etc.) is the biggest remaining SEO upgrade.
+index.html 81 KB · css 146 KB + 14 KB · soundtrack 1043 KB (loads on demand)

@@ -6,8 +6,19 @@
   au.addEventListener('ended', () => { if (on && engine === 'el') { au.currentTime = 0; au.play().catch(() => {}); } });   /* safety net if a browser ignores loop */
   const LEVEL = 0.9, DUCKED = 0.25;           /* normal volume / volume under case studies */
   let on = false, busy = false, raf = 0, wasOn = false, vol = 0, engine = '', pref = '', loaded = false, blocked = false, userOff = false, dead = false, firstErr = null;
-  let ctx = null, gain = null, node = null, buf = null;
+  let bytes = null, ctx = null, gain = null, node = null, buf = null;
   const target = () => /\bkc-open\b/.test(root.className) ? DUCKED : LEVEL;
+  const getBytes = async () => {   /* the soundtrack is now a normal file (assets/audio/soundtrack.mp3); a data: URI still works too */
+    if (bytes) return bytes;
+    const raw = au.dataset.src;
+    if (/^data:/.test(raw)) {
+      const bin = atob(raw.slice(raw.indexOf(',') + 1)), u8 = new Uint8Array(bin.length);
+      for (let i = 0; i < bin.length; i++) u8[i] = bin.charCodeAt(i);
+      return (bytes = u8);
+    }
+    return (bytes = new Uint8Array(await (await fetch(raw)).arrayBuffer()));
+  };
+  let blobUrl = '';
   const setVol = v => { vol = Math.max(0, Math.min(1, v)); if (engine === 'wa' && gain) gain.gain.value = vol; else au.volume = vol; };
   const fadeTo = (v, ms, done) => {
     cancelAnimationFrame(raf);
@@ -27,10 +38,11 @@
     btn.classList.toggle('attn', blocked && !on);
     btn.dataset.engine = on ? engine : '';
   };
-  /* Method 1: the single <audio> element, streaming assets/audio/soundtrack.mp3 */
-  const tryEl = async () => {
+  /* Method 1 + 2: the single <audio> element, fed from the embedded track (Blob URL first, then the data: URI) */
+  const tryEl = async kind => {
     au.pause();
-    au.src = au.dataset.src;
+    if (kind === 'blob') { blobUrl = blobUrl || URL.createObjectURL(new Blob([await getBytes()], { type: 'audio/mpeg' })); au.src = blobUrl; }
+    else au.src = au.dataset.src;
     au.muted = false; au.volume = 0; engine = 'el';
     await au.play();
     await new Promise((res, rej) => {
@@ -40,15 +52,15 @@
       au.addEventListener('error', () => { clearTimeout(t); rej(new Error('media error')); }, { once: true });
     });
   };
-  /* Method 2 (only if the element cannot play, never alongside it): Web Audio decodes the same file */
+  /* Method 3 (only if the element cannot play, never alongside it): Web Audio decodes the same embedded bytes */
   const tryWA = async () => {
     const AC = window.AudioContext || window.webkitAudioContext;
     if (!AC) throw new Error('Web Audio unsupported');
     if (!ctx) { ctx = new AC(); gain = ctx.createGain(); gain.gain.value = 0; gain.connect(ctx.destination); }
     await ctx.resume();
     if (!buf) {
-      const ab = await (await fetch(au.dataset.src)).arrayBuffer();
-      buf = await new Promise((res, rej) => { const bad = () => rej(new Error('The soundtrack could not be decoded')); const p = ctx.decodeAudioData(ab, res, bad); if (p && p.catch) p.catch(bad); });
+      const ab = (await getBytes()).buffer.slice(0);
+      buf = await new Promise((res, rej) => { const bad = () => rej(new Error('The embedded soundtrack could not be decoded')); const p = ctx.decodeAudioData(ab, res, bad); if (p && p.catch) p.catch(bad); });
     }
     if (node) { try { node.stop(); } catch (e) {} try { node.disconnect(); } catch (e) {} node = null; }   /* never two sources at once */
     node = ctx.createBufferSource(); node.buffer = buf; node.loop = true; node.connect(gain);
@@ -77,7 +89,7 @@
       busy = false; blocked = false; on = true; ui(); fadeTo(target(), 1000); return;
     }
     vol = 0; if (!quiet) label.textContent = 'Loading…';
-    const order = pref === 'wa' ? [tryWA] : [tryEl, tryWA];
+    const order = pref === 'wa' ? [tryWA] : [() => tryEl('blob'), () => tryEl('data'), tryWA];
     let err = null;
     for (const f of order) { try { await f(); err = null; break; } catch (e) { err = e; firstErr = firstErr || e; try { halt(); } catch (_) {} if (denied(e)) break; } }
     busy = false;

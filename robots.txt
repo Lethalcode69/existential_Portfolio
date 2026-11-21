@@ -1,3 +1,4 @@
+# https://existential.design/robots.txt
 User-agent: *
 Allow: /
 

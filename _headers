@@ -1,51 +1,57 @@
-/*
-  X-Content-Type-Options: nosniff
-  X-Frame-Options: DENY
-  Referrer-Policy: strict-origin-when-cross-origin
-  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), interest-cohort=()
-  Cross-Origin-Opener-Policy: same-origin
-  Strict-Transport-Security: max-age=31536000; includeSubDomains
-  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob: data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests
+# Netlify and Cloudflare Pages read this file as-is.
+# Static files are versioned with ?v=… in index.html, so they can be cached for a year.
 
-/
-  Cache-Control: public, max-age=0, must-revalidate
-/index.html
-  Cache-Control: public, max-age=0, must-revalidate
+/*
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self' blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; upgrade-insecure-requests
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()
+  Cross-Origin-Opener-Policy: same-origin
+
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
 /css/*
   Cache-Control: public, max-age=31536000, immutable
+
 /js/*
   Cache-Control: public, max-age=31536000, immutable
-/assets/img/*
-  Cache-Control: public, max-age=2592000
-/assets/audio/*
-  Cache-Control: public, max-age=2592000
-/assets/docs/*
-  Cache-Control: public, max-age=3600, must-revalidate
+
 /favicon.ico
   Cache-Control: public, max-age=604800
+
 /favicon.svg
   Cache-Control: public, max-age=604800
+
 /favicon-16.png
   Cache-Control: public, max-age=604800
+
 /favicon-32.png
   Cache-Control: public, max-age=604800
+
 /apple-touch-icon.png
   Cache-Control: public, max-age=604800
+
 /icon-192.png
   Cache-Control: public, max-age=604800
+
 /icon-512.png
   Cache-Control: public, max-age=604800
+
 /icon-maskable-512.png
   Cache-Control: public, max-age=604800
+
 /og-image.jpg
   Cache-Control: public, max-age=604800
-/sitemap.xml
-  Cache-Control: public, max-age=3600
+
 /robots.txt
-  Cache-Control: public, max-age=3600
-/site.webmanifest
-  Cache-Control: public, max-age=3600
+  Cache-Control: public, max-age=86400
+
+/sitemap.xml
+  Cache-Control: public, max-age=86400
+
 /site.webmanifest
   Content-Type: application/manifest+json; charset=utf-8
-/404.html
-  X-Robots-Tag: noindex
+  Cache-Control: public, max-age=86400
