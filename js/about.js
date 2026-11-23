@@ -39,6 +39,7 @@
   if('IntersectionObserver' in window)new IntersectionObserver(es=>{inView=es[0].isIntersecting;restart()},{threshold:.35}).observe(about);
   restart();
 })();
+
 (()=>{
 const about=document.getElementById('about'),cv=document.getElementById('abGeo');if(!about||!cv)return;
 const stg=[...about.querySelectorAll('.ab-stages li')];
