@@ -1,3 +1,4 @@
+
 /* ---- base ---- */
 :root{--bg:#040509;--teal:#2DE6D2;--violet:#8B5CF6;--grey:#C9CED6;--tx:#eef1f6;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 *{box-sizing:border-box}
@@ -1594,3 +1595,4 @@ html.kc-light nav .nav-center img{filter:invert(.92) hue-rotate(180deg)!importan
 
 
 /* #cap's global h2 rules (nowrap, 100% width) must not leak into the About headings */
+

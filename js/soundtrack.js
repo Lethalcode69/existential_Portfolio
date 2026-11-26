@@ -8,11 +8,15 @@
   let on = false, busy = false, raf = 0, wasOn = false, vol = 0, engine = '', pref = '', loaded = false, blocked = false, userOff = false, dead = false, firstErr = null;
   let bytes = null, ctx = null, gain = null, node = null, buf = null;
   const target = () => /\bkc-open\b/.test(root.className) ? DUCKED : LEVEL;
-  const getBytes = () => {
+  const getBytes = async () => {   /* the soundtrack is now a normal file (assets/audio/soundtrack.mp3); a data: URI still works too */
     if (bytes) return bytes;
-    const raw = au.dataset.src, bin = atob(raw.slice(raw.indexOf(',') + 1)), u8 = new Uint8Array(bin.length);
-    for (let i = 0; i < bin.length; i++) u8[i] = bin.charCodeAt(i);
-    return (bytes = u8);
+    const raw = au.dataset.src;
+    if (/^data:/.test(raw)) {
+      const bin = atob(raw.slice(raw.indexOf(',') + 1)), u8 = new Uint8Array(bin.length);
+      for (let i = 0; i < bin.length; i++) u8[i] = bin.charCodeAt(i);
+      return (bytes = u8);
+    }
+    return (bytes = new Uint8Array(await (await fetch(raw)).arrayBuffer()));
   };
   let blobUrl = '';
   const setVol = v => { vol = Math.max(0, Math.min(1, v)); if (engine === 'wa' && gain) gain.gain.value = vol; else au.volume = vol; };
@@ -37,7 +41,7 @@
   /* Method 1 + 2: the single <audio> element, fed from the embedded track (Blob URL first, then the data: URI) */
   const tryEl = async kind => {
     au.pause();
-    if (kind === 'blob') { blobUrl = blobUrl || URL.createObjectURL(new Blob([getBytes()], { type: 'audio/mpeg' })); au.src = blobUrl; }
+    if (kind === 'blob') { blobUrl = blobUrl || URL.createObjectURL(new Blob([await getBytes()], { type: 'audio/mpeg' })); au.src = blobUrl; }
     else au.src = au.dataset.src;
     au.muted = false; au.volume = 0; engine = 'el';
     await au.play();
@@ -55,7 +59,7 @@
     if (!ctx) { ctx = new AC(); gain = ctx.createGain(); gain.gain.value = 0; gain.connect(ctx.destination); }
     await ctx.resume();
     if (!buf) {
-      const ab = getBytes().buffer.slice(0);
+      const ab = (await getBytes()).buffer.slice(0);
       buf = await new Promise((res, rej) => { const bad = () => rej(new Error('The embedded soundtrack could not be decoded')); const p = ctx.decodeAudioData(ab, res, bad); if (p && p.catch) p.catch(bad); });
     }
     if (node) { try { node.stop(); } catch (e) {} try { node.disconnect(); } catch (e) {} node = null; }   /* never two sources at once */
