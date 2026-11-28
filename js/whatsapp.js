@@ -1,3 +1,4 @@
+/* WhatsApp floating button */
 (() => {
   /* ---- Edit these two lines to change the number / the pre-filled message ---- */
   const WA_NUMBER = '919162008243';   /* country code + number, digits only */

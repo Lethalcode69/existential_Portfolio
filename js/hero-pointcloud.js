@@ -1,3 +1,4 @@
+/* Hero: point-cloud animation (continuous six-stage loop) */
 /* Hero: the point-cloud animation runs on a continuous loop: six stages, each morphing into the next, and the last one folds back into the first. */
 (()=>{const stage=document.getElementById('hero-pc'),cv=document.getElementById('hero-pc-canvas'),cx=cv&&cv.getContext&&cv.getContext('2d');if(!stage||!cx)return;
 const mqM=matchMedia('(max-width:760px)'),mqR=matchMedia('(prefers-reduced-motion: reduce)'),mqT=matchMedia('(max-width:1024px)');

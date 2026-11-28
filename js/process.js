@@ -1,3 +1,4 @@
+/* Process: current-step highlight */
 (() => {
  const steps = [...document.querySelectorAll('#process-evolution .process-step')];
  if (!steps.length || !('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -6,6 +7,8 @@
  }, { rootMargin: '-10% 0px -10% 0px', threshold: 0.35 });
  steps.forEach(step => observer.observe(step));
 })();
+
+/* Process: lifecycle canvas ("How every area evolves", six stages on a loop) */
 (()=>{const el=document.getElementById('evolve'),cv=document.getElementById('evc');if(!el||!cv)return;
 const ctx=cv.getContext('2d'),labs=[...el.querySelectorAll('.ev-lab')],rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
 const T=[45,230,210],V=[139,92,246],cl=(v,a,b)=>Math.max(a,Math.min(b,v));

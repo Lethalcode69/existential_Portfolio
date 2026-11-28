@@ -1,3 +1,4 @@
+/* Footer: logo lockup reveal + year */
 (() => {
   const logo = document.getElementById('logoLockup');
   if (!logo) return;

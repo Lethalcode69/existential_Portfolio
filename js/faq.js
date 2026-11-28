@@ -1,3 +1,4 @@
+/* FAQ accordion */
 (()=>{const root=document.getElementById('faq');if(!root)return;
 const items=[...root.querySelectorAll('.faq-item')],qs=items.map(i=>i.querySelector('.faq-q'));
 const set=(it,open)=>{it.classList.toggle('is-open',open);it.querySelector('.faq-q').setAttribute('aria-expanded',String(open))};

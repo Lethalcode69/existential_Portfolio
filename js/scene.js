@@ -1,3 +1,4 @@
+/* Scene: hero > sections handoff, section tracking, menu and deep links */
 (function(){
 const $=id=>document.getElementById(id);
 const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));

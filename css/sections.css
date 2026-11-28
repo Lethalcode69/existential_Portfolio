@@ -1,111 +1,7 @@
-/* ---- portfolio-v6 ---- */
-/* ---- Hero: point-cloud stage (replaces the mascot image); the glow sits behind it ---- */
-#hero-pc{position:fixed;inset:0;z-index:5;pointer-events:none;opacity:0;visibility:hidden}
-#hero-pc canvas{display:block;width:100%;height:100%}
-html.kc-open #hero-pc{visibility:hidden!important}
-/* the nav logo stays where it is, always visible */
-nav .nav-center,body.section-mode nav .nav-center{opacity:.82!important;visibility:visible!important}
-
-/* ---- Process and FAQ: plain dark gradient, no animation behind them ---- */
-#process-evolution{background:linear-gradient(180deg,#05080d 0%,#070b13 50%,#05080d 100%)}
-#faq{background:linear-gradient(180deg,#05080d 0%,#070b12 45%,#04070b 100%)}
-
-/* ---- Skillset strip: sits flush immediately after selected work with zero gap ---- */
-.sw-skillset-band{position:relative;z-index:6;width:100vw;margin-left:calc(50% - 50vw);margin-top:0;margin-bottom:0;background:#05080d;--bh:clamp(2.9rem,6.2vh,3.7rem)}
-.sw-skillset-band .ab-band{border-top:1px solid rgba(225,235,245,.14);border-bottom:1px solid rgba(225,235,245,.14)}
-
-/* ---- About v2: pinned founder intro, particle field, infinite tools band ---- */
-#about{position:relative;flex:0 0 auto;margin:0 calc(var(--gx,5vw)*-1) 0;color:var(--tx);isolation:isolate;overflow:visible;background:#05080d;font-family:"Helvetica Neue",Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;--htop:0;--bh:clamp(2.9rem,6.2vh,3.7rem);--ptop:clamp(2rem,4vh,3.5rem);--p:0}
-#about *,#about *::before,#about *::after{box-sizing:border-box}
-#about :focus-visible{outline:2px solid var(--teal);outline-offset:4px;border-radius:4px}
-#cap #about h2{white-space:normal;width:auto}
-#about .ab-pin{position:relative;height:calc(100svh + 85vh)}
-#about .ab-stage{position:sticky;top:0;height:100svh;min-height:560px;overflow:clip;display:flex;flex-direction:column;justify-content:flex-end;background:radial-gradient(120% 80% at 50% 28%,#071018 0,#05080d 70%)}
-#about .ab-portrait{position:absolute;z-index:1;top:var(--ptop);bottom:0;left:0;right:0;margin-inline:auto;width:min(100%,calc((100svh - var(--ptop))*.82));pointer-events:none;transform:scale(calc(1 + var(--p)*.03));transform-origin:50% 30%;-webkit-mask-image:linear-gradient(180deg,#000 0,#000 27%,transparent 62%),linear-gradient(90deg,transparent 0,#000 16%,#000 84%,transparent 100%),linear-gradient(180deg,transparent 0,#000 6%);-webkit-mask-composite:source-in;mask-image:linear-gradient(180deg,#000 0,#000 27%,transparent 62%),linear-gradient(90deg,transparent 0,#000 16%,#000 84%,transparent 100%),linear-gradient(180deg,transparent 0,#000 6%);mask-composite:intersect}
-#about .ab-portrait img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 6%}
-#about .ab-pp{position:absolute;inset:0;width:100%;height:100%;display:none}
-#about.pp .ab-pp{display:block}
-#about.pp .ab-portrait img{visibility:hidden}
-#about.ab-js .ab-pp{opacity:0;transition:opacity 1.4s ease}#about.ab-js.is-in .ab-pp{opacity:1}
-@media(prefers-reduced-motion:reduce){#about.ab-js .ab-pp{opacity:1;transition:none}}
-#about .ab-fx{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
-#about .ab-fx.b{z-index:0}#about .ab-fx.f{z-index:3}
-#about .ab-copy{position:relative;z-index:4;text-align:center;padding:0 6vw;margin-bottom:clamp(1.2rem,3.4vh,2.2rem)}
-#about .ab-name{margin:0;font-weight:500;font-size:clamp(2.7rem,min(7.2vw,11vh),6.8rem);line-height:.98;letter-spacing:-.045em;color:#F4F6FA;text-shadow:0 2px 40px rgba(5,8,13,.85)}
-#about .ab-head{margin:clamp(.9rem,2.2vh,1.4rem) auto 0;font-size:clamp(1.05rem,min(1.6vw,2.6vh),1.5rem);font-weight:600;line-height:1.3;color:#F4F6FA;text-wrap:balance}
-#about .ab-sub{margin:.8rem auto 0;max-width:min(92vw,64rem);text-wrap:balance;font-size:clamp(.88rem,min(1.05vw,1.9vh),1rem);line-height:1.65;color:rgba(201,206,214,.8)}
-#about .ab-bands{position:relative;z-index:4;width:100%}
-:is(#about, .sw-skillset-band) .ab-band{--gap:clamp(1.1rem,2vw,2rem);display:grid;grid-template-columns:clamp(8.5rem,13vw,12rem) minmax(0,1fr);align-items:center;height:var(--bh);border-top:1px solid rgba(225,235,245,.14);background:linear-gradient(180deg,rgba(5,8,13,.55),rgba(5,8,13,.88))}
-:is(#about, .sw-skillset-band) .ab-band:last-child{border-bottom:1px solid rgba(225,235,245,.14)}
-:is(#about, .sw-skillset-band) .ab-band:focus-visible{outline:1px solid var(--teal);outline-offset:-3px;border-radius:0}
-:is(#about, .sw-skillset-band) .ab-label{display:flex;align-items:center;gap:.7rem;padding-left:clamp(1.2rem,5vw,4.5rem);font-size:.64rem;font-weight:600;letter-spacing:.3em;text-transform:uppercase;white-space:nowrap;color:rgba(238,242,248,.88)}
-:is(#about, .sw-skillset-band) .ab-label::after{content:"";width:5px;height:5px;border-radius:50%;background:var(--teal);box-shadow:0 0 10px var(--teal)}
-@media(min-width:761px){
-  :is(#about .ab-bands, .sw-skillset-band) .ab-band{grid-template-columns:clamp(8rem,10vw,10.5rem) minmax(0,1fr)}
-  :is(#about .ab-bands, .sw-skillset-band) .ab-label{padding-left:clamp(1.2rem,4vw,3rem)}
-  :is(#about .ab-bands, .sw-skillset-band) .ab-view{-webkit-mask-image:linear-gradient(90deg,transparent,#000 4%);mask-image:linear-gradient(90deg,transparent,#000 4%)}
-}
-:is(#about, .sw-skillset-band) .ab-view{position:relative;overflow:hidden;height:100%;display:flex;align-items:center;-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 5%,#000 94%,transparent)}
-:is(#about, .sw-skillset-band) .ab-roll{display:flex;width:max-content;will-change:transform}
-:is(#about, .sw-skillset-band) .ab-band.rtl .ab-roll{animation:ab-rtl 90s linear infinite}
-:is(#about, .sw-skillset-band) .ab-band.ltr .ab-roll{animation:ab-ltr 100s linear infinite}
-@keyframes ab-rtl{to{transform:translate3d(-50%,0,0)}}
-@keyframes ab-ltr{from{transform:translate3d(-50%,0,0)}to{transform:translate3d(0,0,0)}}
-#about.is-idle .ab-bands .ab-roll{animation-play-state:paused}
-:is(#about, .sw-skillset-band) .ab-seq{display:flex;flex:none;gap:var(--gap);margin:0;padding:0 var(--gap) 0 0;list-style:none}
-:is(#about, .sw-skillset-band) .ab-seq li{display:flex;align-items:center;gap:var(--gap);white-space:nowrap;font-size:clamp(.78rem,.98vw,.92rem);color:rgba(238,242,248,.86)}
-:is(#about, .sw-skillset-band) .ab-seq li::after{content:"/";color:rgba(45,230,210,.55)}
-/* entrance: only hidden once JS is running, so no-JS still shows everything */
-#about.ab-js .ab-r{opacity:0;transform:translateY(18px);transition:opacity .9s ease var(--d,0s),transform .9s cubic-bezier(.2,.7,.2,1) var(--d,0s)}
-#about.ab-js .ab-portrait img{opacity:0;transform:scale(.94);transition:opacity 1.4s ease,transform 1.8s cubic-bezier(.2,.7,.2,1)}
-#about.ab-js .ab-fx{opacity:0;transition:opacity 1.8s ease .25s}
-#about.ab-js.is-in .ab-r{opacity:1;transform:none}
-#about.ab-js.is-in .ab-portrait img{opacity:1;transform:none}
-#about.ab-js.is-in .ab-fx{opacity:1}
-/* mobile / short screens: natural vertical flow, no pinning */
-@media(max-width:760px),(max-height:600px){
-  #about{--ph:min(64svh,560px)}
-  #about .ab-pin{height:auto}
-  #about .ab-stage{position:relative;height:auto;min-height:max(100svh,700px);padding-top:calc(var(--ptop) + var(--ph) - 6.5rem)}
-  #about .ab-portrait{bottom:auto;height:var(--ph);width:min(100%,calc(var(--ph)*.82))}
-}
-@media(max-width:760px){
-  #about, .sw-skillset-band{--bh:4rem}
-  :is(#about, .sw-skillset-band) .ab-band{grid-template-columns:1fr;grid-template-rows:auto 1.7rem;height:var(--bh);padding:.5rem 0;row-gap:.25rem;align-content:center}
-  :is(#about, .sw-skillset-band) .ab-label{padding-left:6vw;font-size:.58rem}
-  :is(#about, .sw-skillset-band) .ab-view{height:1.7rem}
-}
-@media(prefers-reduced-motion:reduce){
-  #about.ab-js .ab-r,#about.ab-js .ab-portrait img,#about.ab-js .ab-fx{opacity:1;transform:none;transition:none}
-  #about .ab-portrait{transform:none}
-  :is(#about, .sw-skillset-band) .ab-roll{animation:none!important;transform:none}
-  :is(#about, .sw-skillset-band) .ab-view{overflow-x:auto;scrollbar-width:none;-webkit-mask-image:none;mask-image:none}
-  :is(#about, .sw-skillset-band) .ab-seq[aria-hidden]{display:none}
-}
-
-/* ---- Sticky resume download: centre-right edge tab ---- */
-#resume-float{position:fixed;right:env(safe-area-inset-right,0px);top:50%;transform:translateY(-50%);z-index:995;display:flex;flex-direction:column;align-items:center;gap:.75rem;padding:1rem .6rem;border-radius:14px 0 0 14px;color:#031412;text-decoration:none;font:600 .66rem/1 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;letter-spacing:.22em;text-transform:uppercase;background:var(--teal);border:1px solid var(--teal);border-right:0;box-shadow:0 10px 34px rgba(0,0,0,.5),0 0 22px rgba(45,230,210,.28);opacity:0;animation:resume-in .7s ease 1.4s forwards;transition:background .25s,color .25s,border-color .25s,padding .25s,box-shadow .25s}
-#resume-float .rf-ico{width:18px;height:18px;flex:none}
-#resume-float .rf-txt{writing-mode:vertical-rl;white-space:nowrap}
-#resume-float:hover,#resume-float:focus-visible{background:#7cf3e6;color:#031412;border-color:#7cf3e6;padding-right:.9rem;box-shadow:0 12px 38px rgba(0,0,0,.55),0 0 32px rgba(45,230,210,.45);outline:none}
-#resume-float:focus-visible{outline:2px solid #fff;outline-offset:3px}
-
-@keyframes resume-in{to{opacity:1}}
-@media(max-width:760px){#resume-float{padding:.8rem .5rem;gap:.6rem;font-size:.6rem}#resume-float .rf-ico{width:16px;height:16px}}
-@media(prefers-reduced-motion:reduce){#resume-float{animation:none;opacity:1;transition:none}}
-#brand-float{position:fixed;right:env(safe-area-inset-right,0px);top:50%;transform:translateY(-50%);z-index:995;display:flex;flex-direction:column;align-items:center;gap:.75rem;padding:1rem .6rem;border-radius:14px 0 0 14px;color:#031412;text-decoration:none;font:600 .66rem/1 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;letter-spacing:.22em;text-transform:uppercase;background:var(--teal);border:1px solid var(--teal);border-right:0;box-shadow:0 10px 34px rgba(0,0,0,.5),0 0 22px rgba(45,230,210,.28);opacity:0;animation:resume-in .7s ease 1.55s forwards;transition:background .25s,color .25s,border-color .25s,padding .25s,box-shadow .25s}
-#brand-float .rf-ico{width:18px;height:18px;flex:none}
-#brand-float .rf-txt{writing-mode:vertical-rl;white-space:nowrap}
-#brand-float:hover,#brand-float:focus-visible{background:#7cf3e6;color:#031412;border-color:#7cf3e6;padding-right:.9rem;box-shadow:0 12px 38px rgba(0,0,0,.55),0 0 32px rgba(45,230,210,.45);outline:none}
-#brand-float:focus-visible{outline:2px solid #fff;outline-offset:3px}
-html.kc-open #brand-float{display:none}
-@media(max-width:760px){#brand-float{padding:.8rem .5rem;gap:.6rem;font-size:.6rem}#brand-float .rf-ico{width:16px;height:16px}}
-@media(prefers-reduced-motion:reduce){#brand-float{animation:none;opacity:1;transition:none}}
-#edge-tabs{position:fixed;right:env(safe-area-inset-right,0px);top:50%;transform:translateY(-50%);z-index:995;display:flex;flex-direction:column;align-items:flex-end;gap:.7rem}
-#edge-tabs #resume-float,#edge-tabs #brand-float{position:static;transform:none;z-index:auto}
-
-@media(max-height:560px){#edge-tabs{gap:.4rem}}
-/* ---- merge-v1 ---- */
+/* ============================================================
+   sections.css: section and page styles (loads after main.css; order matters)
+   ============================================================ */
+/* What I build: offers */
 #cap .offer-go{display:inline-block;margin-top:.7rem;color:var(--teal);font-size:.78rem;letter-spacing:.04em;text-decoration:none;border-bottom:1px solid rgba(45,230,210,.4);transition:border-color .2s}
 #cap .offer-go:hover,#cap .offer-go:focus-visible{border-color:var(--teal);outline:none}
 /* Evolve: full-bleed pitch-black loop */
@@ -144,7 +40,8 @@ html.kc-light nav .nav-brand{color:#0a0c12}
 #site-footer .footer-content{padding-top:clamp(220px,26vw,380px)!important}
 #site-footer .mascot-wrap{justify-self:start!important;width:clamp(150px,24vw,350px)}
 #site-footer .m3d-foot{width:100%}
-/* ---- brand-case-css ---- */
+
+/* Brand guidelines page (#brand-case) */
 /* ===== Brand system internal screen (#brand-case): rides the shared case-study engine ===== */
 #brand-case{--kc-a:#2de6d2;--kc-a2:#8b5cf6;--kc-ad:#00806f;--kc-ah:#7cf3e6;--kc-ar:45,230,210;--kc-on:#04100e;--kc-ghost:"BRAND"}
 #brand-case .kc-prog{background:linear-gradient(90deg,#2de6d2,#8b5cf6)}
@@ -253,11 +150,16 @@ html.kc-light nav .nav-brand{color:#0a0c12}
 #brand-case .bs-pho{margin:0;width:min(44%,170px);padding:5px;border-radius:22px;background:#111318;border:1px solid rgba(225,235,245,.25)}
 #brand-case .bs-pho img{border:0;border-radius:17px;box-shadow:none}
 @media(max-width:700px){#brand-case .bs-4{grid-template-columns:1fr 1fr}#brand-case .bs-4 figure:nth-child(3){border-left:0}#brand-case .bs-4 figure:nth-child(n+3){border-top:1px solid var(--kl)}}
-/* ---- bs-identity-css ---- */
+
+/* Brand guidelines: identity wordmark */
 #brand-case .bs-wm{position:relative;z-index:0;overflow:hidden;margin-top:clamp(5rem,8vw,6.5rem);padding:0 3vw;text-align:center;white-space:nowrap;font-size:clamp(2.2rem,11.2vw,20rem);font-weight:650;letter-spacing:-.07em;line-height:.9;color:rgba(255,255,255,.06);pointer-events:none;user-select:none}
 #brand-case #bs-identity{padding-top:clamp(1rem,2.4vw,2.2rem)}
 #brand-case #bs-identity::after{content:none}
-/* ---- v4-landing ---- */
+
+/* Overlay scroll lock + hide legacy canvas */
+body.lock{overflow:auto}#gl,#spacer{display:none}
+
+/* Landing: lifecycle + navigation */
 /* Lifecycle: the 3D simulation only, no text over it */
 
 /* Navigation: one fixed menu icon (top right), above every page and overlay */
@@ -296,7 +198,8 @@ nav .nav-center{grid-column:2}
  #selected-work .sw-panel,#selected-work.sw-on .sw-panel{padding-top:4.6rem;padding-bottom:4rem}
  #selected-work .sw-shots,#selected-work.sw-on .sw-shots,#selected-work .sw-shot,#selected-work.sw-on .sw-shot,#selected-work .sw-shot img{max-height:32vh}
 }
-/* ---- v3-landing ---- */
+
+/* How I work: lifecycle stages */
 /* How we work: six lifecycle stages */
 #process-evolution .process-kicker{text-transform:uppercase}
 #process-evolution .process-sv{list-style:none;margin:18px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:9px 22px;max-width:580px}
@@ -304,8 +207,7 @@ nav .nav-center{grid-column:2}
 #process-evolution .process-sv li:before{content:"";position:absolute;left:0;top:.62em;width:7px;height:1px;background:var(--process-teal)}
 @media(max-width:1100px){#process-evolution .process-sv{grid-template-columns:1fr}}
 
-/* ---- v5-faq ---- */
-
+/* Process, About, FAQ, footer and case-study layers */
 /* How we work: lets the shared animation show through very faintly */
 #process-evolution{background:transparent}
 #process-evolution:before{-webkit-mask-image:linear-gradient(180deg,#000 80%,transparent 100%);mask-image:linear-gradient(180deg,#000 80%,transparent 100%);background:radial-gradient(ellipse at 19% 38%,rgba(0,209,178,.12),transparent 40%),radial-gradient(ellipse at 38% 72%,rgba(120,97,255,.12),transparent 42%),linear-gradient(180deg,rgba(5,8,13,.78) 0%,rgba(6,9,16,.78) 60%,rgba(4,7,11,.78) 100%)}
@@ -416,9 +318,17 @@ html.kc-open.bs-on #bs-hud{opacity:1;visibility:visible;transform:translateX(-50
 #brand-case .kc-act:not(.kc-top)>section{opacity:var(--g,1)}
 #brand-case .bs-int i{position:fixed;inset:0;z-index:var(--z,2);background:var(--bc,#000);clip-path:circle(0px at 50% 50%);will-change:clip-path;pointer-events:none}
 
-/* ---- focus-top-aligned: the left stack (eyebrow, title, tags) stays at the top of every row, however tall the right column grows ---- */
-@media (min-width:761px){
-  #cap .offer{align-items:start!important;grid-template-rows:auto auto auto 1fr!important;}
-  #cap .offer-copy>p:not(.eyebrow){grid-row:1 / 5!important;align-self:start!important;}
-  #cap .offer-copy .tags{grid-row:3!important;align-self:start!important;}
-}
+/* ---- Swarm field: a pinned, scroll-driven 3D lattice after the five focus areas ---- */
+#swarm{position:relative;flex:0 0 auto;margin:0 calc(var(--gx,5vw)*-1);background:#000;isolation:isolate;color:#eef1f6;--zp:0}
+#swarm .sz-pin{position:relative;height:calc(100svh + 220vh)}
+#swarm .sz-stage{position:sticky;top:0;height:100svh;min-height:520px;overflow:clip;background:#000}
+#swarm canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+#swarm #szc{cursor:grab;touch-action:pan-y}#swarm.is-drag #szc{cursor:grabbing}
+#swarm #szg{filter:blur(16px) saturate(1.5);mix-blend-mode:screen;opacity:.8;pointer-events:none}
+#swarm .sz-hint{position:absolute;left:50%;bottom:calc(2.2rem + env(safe-area-inset-bottom,0px));transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.8rem;margin:0;font:500 .66rem/1 Inter,ui-sans-serif,system-ui,sans-serif;letter-spacing:.26em;text-transform:uppercase;color:#9da4ad;opacity:calc(1 - var(--zp) * 7);pointer-events:none}
+#swarm .sz-hint span{width:1px;height:2.4rem;background:linear-gradient(#2de6d2,transparent)}
+@media(max-width:760px){#swarm .sz-pin{height:calc(100svh + 150vh)}}
+@media(prefers-reduced-motion:reduce){#swarm .sz-pin{height:auto}#swarm .sz-stage{position:relative;height:100svh}#swarm .sz-hint{display:none}}
+#swarm.no-gl .sz-pin{height:auto}#swarm.no-gl .sz-stage{position:relative;height:60vh;background:radial-gradient(60% 60% at 50% 50%,rgba(45,230,210,.18),rgba(139,92,246,.08) 45%,transparent 72%),#000}#swarm.no-gl .sz-hint,#swarm.no-gl canvas{display:none}
+
+/* ---- Brand page: the five focus areas as a slow horizontal ticker ---- */

@@ -1,3 +1,4 @@
+/* About: pinned founder intro */
 (()=>{
 const about=document.getElementById('about');if(!about)return;
 const $=q=>about.querySelector(q),pin=$('.ab-pin'),stage=$('.ab-stage'),por=$('.ab-portrait');
@@ -8,7 +9,7 @@ about.classList.add('ab-js');
 if(reduce||!('IntersectionObserver' in window))about.classList.add('is-in');
 else new IntersectionObserver((es,o)=>{if(es[0].isIntersecting){about.classList.add('is-in');o.disconnect()}},{threshold:.3}).observe(stage);
 /* 2. bands: constant speed, eased pause/resume on hover or keyboard focus */
-const bands=[...document.querySelectorAll('.ab-band')].map(b=>{
+const bands=[...about.querySelectorAll('.ab-band')].map(b=>{
   const roll=b.querySelector('.ab-roll'),sq=roll.querySelector('.ab-seq'),base=b.classList.contains('rtl')?44:40;
   let target=1,rate=1,raf=0;
   const anim=()=>roll.getAnimations?roll.getAnimations()[0]:null;
